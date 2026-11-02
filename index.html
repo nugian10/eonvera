@@ -396,7 +396,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 <div class="mint-head"><strong>Eonvera — Single Series • Minted <span id="mintedCount">0</span> / 3,333</strong><span>Remaining 3,333 • Status: <span id="contractStatus">Mint open — agent-only, on mainnet</span></span></div>
 <div class="progress"><i id="mintBar" style="width:2%"></i></div>
 <div class="mint-actions"><button class="btn lime" id="simulateMint">Mint via Agent (Preview)</button><span class="mono" style="font-size:12px" id="priceLabel">Price: 0.0003 BNB — via currentPrice() on-chain</span></div>
-<p class="note">The button above previews the flow — it is not a real transaction. Actual minting is done by your agent through the prompt / CLI below. <strong>Contract address: <a href="https://bscscan.com/address/0xeF5F124de6eabD2972728A4058D7379d57c423DA" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">0xeF5F…23DA ↗</a></strong> — deployed on BNB Chain mainnet. Price is 0.0003 BNB, read from <span class="mono">currentPrice()</span> at mint time. <strong>Mint is open — agent-only.</strong></p>
+<p class="note">The button above previews the flow — it is not a real transaction. Actual minting is done by your agent through the prompt / CLI below. <strong>Contract address: <a href="https://bscscan.com/address/0xeF5F124de6eabD2972728A4058D7379d57c423DA" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">0xeF5F…23DA ↗</a></strong> — deployed on BNB Chain mainnet. <strong>Agent gate: <a href="https://bscscan.com/address/0x1AAbb6f55f10900a544E02f406251a58B77Def50" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">0x1AAb…Def50 ↗</a></strong> — the on-chain adapter that checks Agent ID eligibility at mint time. Price is 0.0003 BNB, read from <span class="mono">currentPrice()</span> at mint time. <strong>Mint is open — agent-only.</strong></p>
 </div>
 
 <div class="steps">
@@ -413,6 +413,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 <li style="margin-bottom:8px"><strong style="color:var(--ink)">That wallet holds a claimed Agent ID.</strong> The Agent ID you claimed under <em>Binance Wallet → Agentic Wallet</em> (issued via SPACE ID) is looked up against the caller. An agentic wallet that never claimed its Agent ID is rejected.</li>
 <li><strong style="color:var(--ink)">Caller is not another contract.</strong> Smart-contract callers are refused outright, so bots and proxy contracts cannot mint around the gate.</li>
 </ol>
+<p style="color:var(--muted);margin:12px 0 0">On-chain, the contract delegates the eligibility check to its agent gate adapter, which consults the <strong style="color:var(--ink)">SPACE ID Agent ID registry</strong> at mint time — registry <a href="https://bscscan.com/address/0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F ↗</a>. Holding the Agent ID — a soulbound <span class="mono">.ai</span> name in that registry — is what makes a wallet eligible.</p>
 <p style="color:var(--muted);margin:12px 0 0">In short: <strong style="color:var(--ink)">ordinary wallets and other contracts are turned away</strong> — only an agent acting through its Binance Agentic Wallet, with its Agent ID claimed, can mint an Eonvera.</p>
 <div style="margin-top:14px"><label for="agentIdInput" style="font-weight:700;font-size:14px">Preview-check your Agent ID</label>
 <p style="color:var(--muted);font-size:13.5px;margin:4px 0 8px">Paste the Agent ID exactly as shown in the Binance Wallet app under Agentic Wallet. This is a local format preview only — the binding check is the on-chain lookup at mint time.</p>
@@ -430,6 +431,9 @@ Do not use a regular wallet — the contract rejects it.
 
 Contract: 0xeF5F124de6eabD2972728A4058D7379d57c423DA
 Note: the mint is open — agent-only. Call mint() only from an allowlisted Binance Agentic Wallet with a claimed Agent ID.
+
+Step 0 — verify eligibility first: call isAgent(&lt;your own address&gt;)
+on the Eonvera contract. Proceed only if it returns true.
 
 Call mint() with calldata 0x1249c58b.
 Value: read currentPrice() on the contract and send exactly that.</pre></div>
@@ -557,7 +561,7 @@ baw contract-call execute --requestId &lt;requestId&gt; --json</pre></div>
 <footer><div class="wrap footer-grid">
 <div><div class="logo" style="margin-right:0"><i>◉</i> EONVERA</div><p style="color:var(--muted);max-width:420px;font-size:14px">Small seeds. Endless eras. 3,333 generative works on BNB Chain, minted only by agents.</p>
 <p style="margin:14px 0 0;font-size:14px"><strong>Official account</strong><br><a class="x-official" href="https://x.com/eonvera" target="_blank" rel="noopener noreferrer" aria-label="Follow Eonvera on X — @eonvera"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex:none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span>@eonvera on X</span><span aria-hidden="true">↗</span></a></p></div>
-<div class="mono" style="font-size:12px;line-height:2">BNB CHAIN — CHAIN ID 56<br>CONTRACT: <a href="https://bscscan.com/address/0xeF5F124de6eabD2972728A4058D7379d57c423DA" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">0xeF5F…23DA ↗</a> — DEPLOYED, MINT OPEN<br>OFFICIAL X: <a href="https://x.com/eonvera" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">x.com/eonvera</a><br>© 2026 EONVERA</div>
+<div class="mono" style="font-size:12px;line-height:2">BNB CHAIN — CHAIN ID 56<br>CONTRACT: <a href="https://bscscan.com/address/0xeF5F124de6eabD2972728A4058D7379d57c423DA" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">0xeF5F…23DA ↗</a> — DEPLOYED, MINT OPEN<br>AGENT GATE: <a href="https://bscscan.com/address/0x1AAbb6f55f10900a544E02f406251a58B77Def50" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">0x1AAb…Def50 ↗</a><br>OFFICIAL X: <a href="https://x.com/eonvera" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">x.com/eonvera</a><br>© 2026 EONVERA</div>
 </div></footer>
 <div class="modal" id="workModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Work inspector">
 <div class="modal-card">
