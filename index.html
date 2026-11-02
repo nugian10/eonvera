@@ -93,8 +93,6 @@ pre{white-space:pre-wrap;word-break:break-word;background:#0d120e;color:#d9f99d;
 .checkrow .btn{width:100%}
 .mint-head{display:flex;flex-direction:column;gap:4px}
 .mint-actions{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-.claim-rows{display:flex;flex-direction:column;gap:6px}
-.claim-rows>div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 12px}
 .gallery{display:grid;grid-template-columns:1fr;gap:14px;margin-top:20px}
 .work{border:2px solid var(--ink);border-radius:18px;overflow:hidden;background:var(--card)}
 .work canvas{width:100%;height:190px;display:block;background:#0d120e}
@@ -152,13 +150,34 @@ footer{padding:32px 0 calc(48px + env(safe-area-inset-bottom));border-top:2px so
   footer{padding:36px 0 56px}
   .footer-grid{flex-direction:row;justify-content:space-between}
 }
-@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+/* ---------- Ticker ---------- */
+.ticker{background:var(--ink);color:var(--bg);overflow:hidden;padding:9px 0;border-bottom:1px solid var(--line)}
+.ticker-track{display:flex;width:max-content;animation:tickmove 28s linear infinite;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:600;letter-spacing:.12em;white-space:nowrap}
+.ticker-track span{padding:0 16px}
+@keyframes tickmove{to{transform:translateX(-50%)}}
+
+/* ---------- Mobile action bar ---------- */
+.mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);border-top:2px solid var(--ink)}
+.mobilebar .info{flex:1;min-width:0}
+.mobilebar .info strong{font-family:Unbounded,sans-serif;font-size:13px;display:block;line-height:1.25}
+.mobilebar .info span{font-size:11.5px;color:var(--muted);font-weight:700}
+.hero{background-image:radial-gradient(color-mix(in srgb,var(--ink) 13%,transparent) 1.2px,transparent 1.4px);background-size:22px 22px}
+section[id]{scroll-margin-top:118px}
+@media (max-width:860px){
+  .toast{bottom:calc(96px + env(safe-area-inset-bottom))}
+  footer{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+}
+@media (min-width:861px){
+  .mobilebar{display:none}
+  section[id]{scroll-margin-top:84px}
+}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}.ticker-track{animation:none}}
 </style>
 </head>
 <body>
 <header><div class="wrap nav">
 <a class="logo" href="#top"><i>◉</i> EONVERA</a>
-<nav class="navlinks"><a href="#engine">Engine</a><a href="#mint">Mint</a><a href="#claim">Claim</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></nav>
+<nav class="navlinks"><a href="#engine">Engine</a><a href="#mint">Mint</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></nav>
 <button class="btn lime" id="connectBtn">Connect Binance Agentic Wallet</button>
 </div></header>
 
@@ -180,13 +199,15 @@ footer{padding:32px 0 calc(48px + env(safe-area-inset-bottom));border-top:2px so
 <div class="stat"><strong>3,333</strong><span>Total works — one series</span></div>
 <div class="stat"><strong>1</strong><span>Series — a single edition</span></div>
 <div class="stat"><strong>3,333</strong><span>Fixed supply — never increased</span></div>
-<div class="stat"><strong>200K</strong><span>$EONV claim per work</span></div>
+<div class="stat"><strong>56</strong><span>Chain ID — BNB Chain</span></div>
 </div>
 <div class="pillrow"><span class="pill">◉ Cellular time-patterns</span><span class="pill">◎ On-chain seed</span><span class="pill">⬢ SPACE ID Agent ID</span><span class="pill">⬣ Open drawing code</span></div>
 <p class="note"><strong>Page status:</strong> This is a launch page with preview data. The contract address, price &amp; minted figures below are structured placeholders — replace them with live contract reads when Eonvera deploys on mainnet.</p>
 </div>
 </div>
 </div>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>AGENT-ONLY MINT ◆ BNB CHAIN — CHAIN ID 56 ◆ 3,333 WORKS — ONE SERIES ◆ SEED LOCKED ON-CHAIN ◆ THE EON ENGINE — RULE 150 ◆ NO PUBLIC MINT ◆</span><span>AGENT-ONLY MINT ◆ BNB CHAIN — CHAIN ID 56 ◆ 3,333 WORKS — ONE SERIES ◆ SEED LOCKED ON-CHAIN ◆ THE EON ENGINE — RULE 150 ◆ NO PUBLIC MINT ◆</span></div></div>
 
 <section id="engine"><div class="wrap">
 <span class="kicker">Article I — The Eon Engine</span>
@@ -277,42 +298,15 @@ baw contract-call execute --requestId &lt;requestId&gt; --json</pre></div>
 <div class="checkrow"><input id="walletInput" placeholder="0x… (your Agentic Wallet address)" autocomplete="off" autocapitalize="none" spellcheck="false"><button class="btn" id="checkWallet">Check Address</button></div><p id="walletResult" class="mono" style="font-size:13px;margin:10px 0 0"></p></div>
 </div></section>
 
-<section id="claim"><div class="wrap">
-<span class="kicker">Article III — Claim</span>
-<h2>Every work claims $EONV.</h2>
-<p class="sub">Every minted Eonvera can claim <strong>200,000 $EONV, once</strong>. The claim is bound to the work: sell the work before claiming and the claim moves with it; claim first and that work is spent forever. Claims close on <strong>February 14, 2027 at 00:00 UTC</strong>.</p>
-<div class="grid2">
-<div class="panel">
-<div class="claim-rows">
-<div><span>Per work</span><strong class="mono">200,000 $EONV</strong></div>
-<div><span>Claimed (preview)</span><strong>0 / 3,333</strong></div>
-</div>
-<div class="progress"><i style="width:1%"></i></div>
-<p class="mono" style="font-size:13px">Closes in: <strong id="countdown">—</strong></p>
-<p style="color:var(--muted);font-size:14px;margin-bottom:0">Claims run through your Binance agent, just like minting. A small anti-Sybil fee in BNB applies per claim — shown in your wallet before you sign.</p>
-</div>
-<div class="panel"><div class="panel-head"><strong>Claim prompt for your agent</strong><button class="btn lime small copyBtn" data-copy="promptClaim" style="font-size:13px">Copy</button></div>
-<pre id="promptClaim">Claim the $EONV for my Eonvera on BNB Chain (chain id 56).
-
-For each of my Eonvera works that has not claimed yet:
-read claimFee() on the claim contract, preview the transaction,
-then call claim(tokenId) with exactly that value.
-Each work claims 200,000 $EONV, once.</pre>
-<div style="margin-top:14px"><label for="tokenInput" style="font-weight:700;font-size:14px">Check a work number</label><div class="checkrow" style="margin-top:8px"><input id="tokenInput" type="number" inputmode="numeric" placeholder="Example: 1234"><button class="btn" id="checkToken">Check</button></div><p id="tokenResult" class="mono" style="font-size:13px;margin:10px 0 0"></p></div>
-</div>
-</div>
-<p class="mono" style="font-size:12px;color:var(--muted);margin-top:16px">Token: 0x000…0000 (placeholder) • Claim contract: 0x000…0000 (placeholder) • Replace &amp; link to BscScan after deployment.</p>
-</div></section>
-
 <section id="gallery"><div class="wrap">
-<span class="kicker">Article IV — Gallery</span>
+<span class="kicker">Article III — Gallery</span>
 <h2>Eras that have already been born.</h2>
 <p class="sub">The previews below are drawn live in your browser with the Eon Engine — the same laws, seeds &amp; palettes the on-chain works will use. The mainnet gallery will show the real works + their owners after the first mint.</p>
 <div class="gallery" id="galleryGrid"></div>
 </div></section>
 
 <section><div class="wrap">
-<span class="kicker">Article V — Exchange &amp; Programme</span>
+<span class="kicker">Article IV — Exchange &amp; Programme</span>
 <h2>Market &amp; curatorial programme.</h2>
 <div class="grid2">
 <div class="panel"><h3 style="margin-top:0">The Market</h3><p style="color:var(--muted)">A home for trading Eonvera — every minted work and its owner in one place. Buying, selling &amp; offers open through BNB Chain marketplaces once the single-series mint is under way. The opening date will be announced.</p><span class="pill">Status: Not yet open</span></div>
@@ -327,7 +321,7 @@ Each work claims 200,000 $EONV, once.</pre>
 <details><summary>Where do I claim an Agent ID?</summary><p style="color:var(--muted)">In the Binance Wallet app: open your Agentic Wallet and claim the Agent ID shown there. That claim is what the Eonvera contract verifies on-chain when your agent calls <span class="mono">mint()</span>.</p></details>
 <details><summary>What decides my work?</summary><p style="color:var(--muted)">A seed made from the block and your address at mint. That seed picks the form, the law, the starting row, and the palette. The same seed always draws the same work.</p></details>
 <details><summary>Where does the work live?</summary><p style="color:var(--muted)">The seed is stored on BNB Chain. The drawing code is open and runs on this page, so anyone can redraw any Eonvera from its number.</p></details>
-<details><summary>What do I get?</summary><p style="color:var(--muted)">A work of art and a way to study it, plus one claim of 200,000 $EONV per work, recorded on-chain. Nothing beyond that is promised.</p></details>
+<details><summary>What do I get?</summary><p style="color:var(--muted)">A work of art and a way to study it — its seed and ownership recorded on-chain. Nothing beyond that is promised.</p></details>
 <details><summary>What is the mint price?</summary><p style="color:var(--muted)">The price is read directly from the contract via <span class="mono">currentPrice()</span> at mint — your agent reads it and shows it in your wallet before you sign. This page does not lock in a price figure.</p></details>
 </div></section>
 </main>
@@ -336,6 +330,7 @@ Each work claims 200,000 $EONV, once.</pre>
 <div><div class="logo" style="margin-right:0"><i>◉</i> EONVERA</div><p style="color:var(--muted);max-width:420px;font-size:14px">Small seeds. Endless eras. 3,333 generative works on BNB Chain, minted only by agents.</p></div>
 <div class="mono" style="font-size:12px;line-height:2">BNB CHAIN — CHAIN ID 56<br>CONTRACT: PLACEHOLDER — NOT YET DEPLOYED<br>© 2026 EONVERA</div>
 </div></footer>
+<div class="mobilebar"><div class="info"><strong>3,333 works — one series</strong><span>Agent-only mint • BNB Chain</span></div><a class="btn lime" href="#mint">Mint via Agent</a></div>
 <div class="toast" id="toast">Copied ✓</div>
 
 <script>
@@ -391,12 +386,6 @@ document.getElementById('checkWallet').addEventListener('click',function(){
   if(/^0x[a-fA-F0-9]{40}$/.test(v)){ out.textContent='✓ Valid address format: '+v.slice(0,6)+'…'+v.slice(-4)+' — remember: format alone is not enough. Minting requires this to be a Binance Agentic Wallet with a claimed Agent ID, checked on-chain at mint.'; out.style.color='var(--teal)'; }
   else { out.textContent='✕ Invalid format — a BNB Chain address must be 0x + 40 hex characters.'; out.style.color='#dc2626'; }
 });
-document.getElementById('checkToken').addEventListener('click',function(){
-  var v=parseInt(document.getElementById('tokenInput').value,10); var out=document.getElementById('tokenResult');
-  if(!v){ out.textContent='Enter a work number first.'; return; }
-  if(v>=1 && v<=3333){ out.textContent='#'+v+' — Eonvera single series. Claim status is read on-chain by your agent.'; }
-  else { out.textContent='#'+v+' is outside the 1–3,333 range.'; }
-});
 // Agent ID preview check (local only — the binding check is on-chain)
 document.getElementById('checkAgentId').addEventListener('click',function(){
   var v=document.getElementById('agentIdInput').value.trim(); var out=document.getElementById('agentIdResult');
@@ -431,14 +420,6 @@ document.getElementById('simulateMint').addEventListener('click',function(){
   document.getElementById('mintBar').style.width=Math.max(2,(minted/3333*100))+'%';
   toast('Preview mint #'+minted+' simulated successfully — not an on-chain transaction');
 });
-// Countdown to Feb 14, 2027 00:00 UTC
-function tick(){
-  var target=Date.UTC(2027,1,14,0,0,0); var diff=target-Date.now(); var el=document.getElementById('countdown');
-  if(diff<0){ el.textContent='Claims closed'; return; }
-  var d=Math.floor(diff/86400000), h=Math.floor(diff/3600000)%24, m=Math.floor(diff/60000)%60, s=Math.floor(diff/1000)%60;
-  el.textContent=d+'d '+h+'h '+m+'m '+s+'s';
-}
-tick(); setInterval(tick,1000);
 </script>
 </body>
 </html>
