@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="color-scheme" content="light dark"/>
+<link rel="icon" href="data:,">
+<title>Eonvera — Time, Minted by Machines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2f0e9; --bg2:#e9e6da; --ink:#10130f; --muted:#5a6055; --line:#10130f;
+  --card:#ffffff; --card2:#10130f; --lime:#b9e62e; --lime-ink:#10130f; --teal:#0e7a66; --amber:#ff9f1c; --vio:#ff4d2e;
+  --radius:18px;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0a0e0b; --bg2:#111712; --ink:#eef2e6; --muted:#9aa89a; --line:#2a332b; --card:#141a15; --card2:#eef2e6; --lime:#c6f24a; --teal:#3ddbb0; }
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;line-height:1.6;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+a{color:inherit} .mono{font-family:"JetBrains Mono",monospace}
+img,canvas{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* ---------- Header (mobile-first) ---------- */
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%, transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:10px;padding:10px 0;flex-wrap:wrap}
+.logo{font-family:Unbounded,sans-serif;font-weight:900;letter-spacing:-.02em;font-size:19px;text-decoration:none;display:flex;align-items:center;gap:8px;margin-right:auto}
+.logo i{width:32px;height:32px;background:var(--lime);border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:15px;color:#10130f;flex:none}
+.navlinks{display:flex;gap:6px;flex-wrap:wrap;order:3;width:100%;padding-bottom:4px}
+.navlinks a{text-decoration:none;font-weight:700;font-size:13px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);min-height:38px;display:inline-flex;align-items:center}
+
+/* ---------- Buttons & controls ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:var(--bg);border:2px solid var(--ink);padding:12px 18px;border-radius:999px;font-weight:800;text-decoration:none;cursor:pointer;font-family:Manrope;font-size:15px;min-height:48px;touch-action:manipulation}
+.btn.lime{background:var(--lime);color:#10130f}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:active{transform:translateY(1px)}
+.btn.small{min-height:44px;padding:9px 14px;font-size:14px}
+#connectBtn{min-height:44px;padding:9px 14px;font-size:13px}
+input,select{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:16px;min-height:48px}
+
+/* ---------- Hero ---------- */
+.hero{padding:32px 0 22px;position:relative}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;border:1.5px solid var(--ink);border-radius:999px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--card)}
+.eyebrow b{width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;flex:none;box-shadow:0 0 0 4px color-mix(in srgb,#22c55e 25%, transparent)}
+h1{font-family:Unbounded,sans-serif;font-size:clamp(34px,10.5vw,84px);line-height:.95;letter-spacing:-.03em;margin:18px 0 14px;max-width:900px}
+h1 em{font-style:normal;background:var(--lime);padding:0 .12em;border-radius:6px;color:#10130f;box-decoration-break:clone}
+.lead{font-size:17px;max-width:680px;color:var(--muted);font-weight:600;margin:0}
+.hero-cta{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.hero-cta .btn{width:100%}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:24px;align-items:stretch}
+.orbital{border:2px solid var(--ink);border-radius:20px;background:var(--card2);color:var(--bg);padding:16px;position:relative;overflow:hidden}
+.orbital canvas{width:100%;height:200px;display:block;border-radius:12px;background:#0a0e0b}
+.orbital-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.orbital-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{border:2px solid var(--ink);border-radius:16px;padding:14px;background:var(--card)}
+.stat strong{font-family:Unbounded;font-size:24px;display:block;line-height:1.1}
+.stat span{font-size:12.5px;color:var(--muted);font-weight:700}
+.pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.pill{font-size:12px;font-weight:800;border:1px solid var(--line);padding:7px 10px;border-radius:999px;background:var(--bg2)}
+
+/* ---------- Sections ---------- */
+section{padding:40px 0;border-top:1px solid var(--line)}
+.kicker{font-family:"JetBrains Mono";font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:700}
+h2{font-family:Unbounded;font-size:clamp(26px,7vw,46px);line-height:1.08;letter-spacing:-.02em;margin:10px 0 12px;max-width:760px}
+.sub{color:var(--muted);max-width:680px;font-weight:600;margin:0}
+.grid2{display:grid;grid-template-columns:1fr;gap:16px;margin-top:22px}
+.panel{border:2px solid var(--ink);border-radius:18px;background:var(--card);padding:18px}
+.panel.dark{background:var(--ink);color:var(--bg)}
+.panel h3{font-family:Unbounded}
+.rulebits{display:grid;grid-template-columns:repeat(4,1fr);gap:10px 6px;margin:16px 0}
+.bit{text-align:center;min-width:0}
+.bit .cells{display:flex;gap:2px;justify-content:center;margin-bottom:6px}
+.bit .c{width:13px;height:13px;border:1.5px solid currentColor;border-radius:3px}
+.bit .c.on{background:var(--lime)}
+.bit button{width:100%;padding:8px 2px;border-radius:999px;border:1.5px solid currentColor;background:transparent;color:inherit;font-weight:800;cursor:pointer;font-size:11.5px;min-height:40px;touch-action:manipulation}
+.bit button.on{background:var(--lime);color:#10130f}
+#bigCanvas{width:100%;height:240px;display:block;border-radius:12px;background:#0d120e}
+.rule-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.rule-actions .btn{flex:1 1 auto}
+.progress{height:16px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;background:var(--bg2);margin:12px 0}
+.progress i{display:block;height:100%;background:repeating-linear-gradient(45deg,var(--lime),var(--lime) 10px,#8fb81d 10px,#8fb81d 20px)}
+.steps{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px}
+.step{border:1.5px solid var(--line);border-radius:16px;padding:18px;background:var(--card)}
+.step b{font-family:Unbounded;font-size:28px;color:var(--teal)}
+.step h3{margin:6px 0}
+.step p{margin:0}
+pre{white-space:pre-wrap;word-break:break-word;background:#0d120e;color:#d9f99d;padding:14px;border-radius:14px;font-family:"JetBrains Mono";font-size:12px;line-height:1.6;overflow:auto;margin:12px 0 0}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.checkrow{display:flex;flex-direction:column;gap:10px}
+.checkrow .btn{width:100%}
+.mint-head{display:flex;flex-direction:column;gap:4px}
+.mint-actions{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.claim-rows{display:flex;flex-direction:column;gap:6px}
+.claim-rows>div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 12px}
+.gallery{display:grid;grid-template-columns:1fr;gap:14px;margin-top:20px}
+.work{border:2px solid var(--ink);border-radius:18px;overflow:hidden;background:var(--card)}
+.work canvas{width:100%;height:190px;display:block;background:#0d120e}
+.work div{padding:14px}
+.work strong{font-family:Unbounded;font-size:14px}
+details{border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--card);margin-top:10px}
+summary{font-weight:800;cursor:pointer;font-size:16px;min-height:32px}
+details p{margin:8px 0 2px}
+.note{font-size:13px;color:var(--muted);border-left:4px solid var(--amber);padding:10px 12px;background:color-mix(in srgb,var(--amber) 12%, transparent);border-radius:0 10px 10px 0;margin-top:14px}
+footer{padding:32px 0 calc(48px + env(safe-area-inset-bottom));border-top:2px solid var(--ink)}
+.footer-grid{display:flex;flex-direction:column;gap:18px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom));background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:50;width:max-content;max-width:calc(100vw - 32px);text-align:center}
+.toast.show{opacity:1}
+
+/* ---------- Wider screens ---------- */
+@media (min-width:560px){
+  .hero-cta{flex-direction:row;flex-wrap:wrap}
+  .hero-cta .btn{width:auto}
+  .gallery{grid-template-columns:1fr 1fr}
+  .rule-actions .btn{flex:0 1 auto}
+  .checkrow{flex-direction:row}
+  .checkrow .btn{width:auto;flex:none}
+  .checkrow input{flex:1;min-width:0}
+  .mint-actions{flex-direction:row;flex-wrap:wrap;align-items:center}
+}
+@media (min-width:861px){
+  .wrap{padding:0 20px}
+  .nav{padding:14px 0;gap:16px;flex-wrap:nowrap}
+  .logo{font-size:22px;margin-right:0}
+  .logo i{width:34px;height:34px;font-size:16px}
+  .navlinks{order:0;width:auto;margin:0 auto;padding-bottom:0}
+  .hero{padding:56px 0 28px}
+  .lead{font-size:21px}
+  .hero-grid{grid-template-columns:1.15fr .85fr;gap:22px;margin-top:32px}
+  .orbital{border-radius:24px;padding:22px;min-height:340px}
+  .orbital canvas{height:240px}
+  .orbital-meta{font-size:13px}
+  .stats{gap:12px}
+  .stat{border-radius:18px;padding:18px}
+  .stat strong{font-size:28px}
+  .stat span{font-size:13px}
+  .pillrow{margin-top:18px}
+  section{padding:56px 0}
+  .grid2{grid-template-columns:1fr 1fr;gap:20px;margin-top:26px}
+  .panel{border-radius:20px;padding:22px}
+  .rulebits{display:flex;flex-wrap:wrap;gap:8px}
+  .bit{width:52px}
+  .bit button{font-size:12.5px}
+  #bigCanvas{height:280px}
+  .steps{grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+  .gallery{grid-template-columns:repeat(3,1fr);margin-top:22px}
+  .mint-head{flex-direction:row;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  pre{font-size:12.5px;padding:16px}
+  details{padding:16px 18px}
+  footer{padding:36px 0 56px}
+  .footer-grid{flex-direction:row;justify-content:space-between}
+}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="logo" href="#top"><i>◉</i> EONVERA</a>
+<nav class="navlinks"><a href="#engine">Engine</a><a href="#mint">Mint</a><a href="#claim">Claim</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></nav>
+<button class="btn lime" id="connectBtn">Connect Binance Agentic Wallet</button>
+</div></header>
+
+<main id="top">
+<div class="wrap hero">
+<span class="eyebrow"><b></b> BNB Chain • Agent-Only • Live (Preview)</span>
+<h1>Time written<br>by <em>machines,</em><br>minted by agents.</h1>
+<p class="lead">Eonvera is 3,333 generative works on BNB Chain. Every work is born from a single <em>seed</em> at the moment of mint — deciding its era, palette, and time-pattern. There is no public mint. Only a Binance Agentic Wallet holding an Agent ID is accepted by the contract.</p>
+<div class="hero-cta"><a class="btn lime" href="#mint">Start Minting via Agent ↓</a><a class="btn ghost" href="#engine">Try the Engine</a></div>
+
+<div class="hero-grid">
+<div class="orbital">
+<div class="orbital-head"><span class="mono" style="font-size:12px;letter-spacing:.12em">LIVE PREVIEW — EON ENGINE v1</span><span class="mono" style="font-size:12px;background:var(--lime);color:#10130f;padding:4px 8px;border-radius:999px;font-weight:700">RULE 150</span></div>
+<canvas id="heroCanvas" width="800" height="360"></canvas>
+<div class="orbital-meta"><span>The seed changes with every block on the real contract</span><span class="mono">CHAIN ID 56 • BSC</span></div>
+</div>
+<div>
+<div class="stats">
+<div class="stat"><strong>3,333</strong><span>Total works — one series</span></div>
+<div class="stat"><strong>1</strong><span>Series — a single edition</span></div>
+<div class="stat"><strong>3,333</strong><span>Fixed supply — never increased</span></div>
+<div class="stat"><strong>200K</strong><span>$EONV claim per work</span></div>
+</div>
+<div class="pillrow"><span class="pill">◉ Cellular time-patterns</span><span class="pill">◎ On-chain seed</span><span class="pill">⬢ SPACE ID Agent ID</span><span class="pill">⬣ Open drawing code</span></div>
+<p class="note"><strong>Page status:</strong> This is a launch page with preview data. The contract address, price &amp; minted figures below are structured placeholders — replace them with live contract reads when Eonvera deploys on mainnet.</p>
+</div>
+</div>
+</div>
+
+<section id="engine"><div class="wrap">
+<span class="kicker">Article I — The Eon Engine</span>
+<h2>One line of time, grown into an era.</h2>
+<p class="sub">Each cell looks at itself and its two neighbours, then decides to live or die on the next line. 8 neighbour patterns, 8 answers — that is the entire law. Change the answers below and watch a new era write itself.</p>
+<div class="grid2">
+<div class="panel dark">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px"><strong class="mono">RULE <span id="ruleNum">150</span></strong><span class="mono" style="font-size:12px;opacity:.7">Tap a box below to flip a bit</span></div>
+<div class="rulebits" id="ruleBits"></div>
+<canvas id="bigCanvas" width="720" height="400"></canvas>
+<div class="rule-actions">
+<button class="btn lime small" data-rule="150">Rule 150</button>
+<button class="btn small" data-rule="110" style="background:var(--bg);color:var(--ink)">Rule 110</button>
+<button class="btn small" data-rule="90" style="background:var(--bg);color:var(--ink)">Rule 90</button>
+<button class="btn small" data-rule="30" style="background:var(--bg);color:var(--ink)">Rule 30 — Chaos</button>
+<button class="btn small" id="randomSeed" style="background:var(--amber);color:#10130f;border-color:var(--amber)">↻ New Seed</button>
+</div>
+</div>
+<div>
+<div class="panel"><h3 style="margin:0 0 8px">Why Rule 150?</h3><p style="color:var(--muted);margin:0">Of the 256 possible laws, most die instantly or repeat in boring loops. Eonvera only takes the laws that produce structures worth looking at — symmetric, controllably chaotic, or capable of universal computation like Rule 110.</p></div>
+<div class="panel" style="margin-top:14px"><h3 style="margin:0 0 10px">Four ways an era grows</h3>
+<ul style="margin:0;padding-left:18px;color:var(--muted);font-weight:600">
+<li><strong style="color:var(--ink)">Fractal —</strong> endless Sierpinski triangles (Rule 90 / 150)</li>
+<li><strong style="color:var(--ink)">Chaos —</strong> never repeats, never the same (Rule 30)</li>
+<li><strong style="color:var(--ink)">Complex —</strong> moving structures that can compute anything (Rule 110)</li>
+<li><strong style="color:var(--ink)">Still —</strong> frozen into geometric textiles (pure Rule 184)</li>
+</ul></div>
+<div class="panel" style="margin-top:14px;background:var(--lime);border-color:var(--ink)"><strong>Eon + Vera.</strong> <span><em>Eon</em> = the longest span of time. <em>Vera</em> = true. Every Eonvera is a record of time that cannot be forged — its seed is locked into the block in which it was minted.</span></div>
+</div>
+</div>
+</div></section>
+
+<section id="mint"><div class="wrap">
+<span class="kicker">Article II — Mint</span>
+<h2>Only agents may mint.</h2>
+<p class="sub">The contract accepts exactly one kind of caller: a <strong>Binance Agentic Wallet</strong> holding a claimed <strong>Agent ID</strong>. There is no generic wallet connect — a regular wallet (MetaMask, Trust Wallet, a plain EOA) cannot mint, and calls from other smart contracts are rejected on-chain. A single series (works 1–3,333) is minting now — one work per call, no per-wallet limit.</p>
+
+<div class="panel" style="margin-top:22px">
+<div class="mint-head"><strong>Eonvera — Single Series • Minted <span id="mintedCount">0</span> / 3,333</strong><span>Remaining 3,333 • Status: <span id="contractStatus">Preview — not connected to mainnet</span></span></div>
+<div class="progress"><i id="mintBar" style="width:2%"></i></div>
+<div class="mint-actions"><button class="btn lime" id="simulateMint">Mint via Agent (Preview)</button><span class="mono" style="font-size:12px" id="priceLabel">Price: read currentPrice() on-chain</span></div>
+<p class="note">The button above previews the flow — it is not a real transaction. Actual minting is done by your agent through the prompt / CLI below. <strong>Contract address: 0x000…0000 — PLACEHOLDER</strong>, and the price is read from <span class="mono">currentPrice()</span> at mint time; both are replaced with the real deployment values once they exist.</p>
+</div>
+
+<div class="steps">
+<div class="step"><b>01</b><h3>Claim your Agent ID</h3><p style="color:var(--muted)">Open the <strong style="color:var(--ink)">Binance Wallet app → Agentic Wallet</strong> and claim your Agent ID there. No Agent ID, no mint — the contract checks it before anything else.</p></div>
+<div class="step"><b>02</b><h3>Call mint()</h3><p style="color:var(--muted)">One call, no arguments. Read <span class="mono">currentPrice()</span> and send exactly that amount. Your wallet shows the value before you sign.</p></div>
+<div class="step"><b>03</b><h3>The block picks your era</h3><p style="color:var(--muted)">The block decides the seed, the seed decides the law, palette &amp; form. There is no curation afterwards.</p></div>
+</div>
+
+<div class="panel" style="margin-top:16px;border-color:var(--teal)">
+<div class="panel-head"><strong>🔒 The Agent ID gate — how the check works</strong><span class="pill" style="background:var(--lime)">Agent-only</span></div>
+<p style="color:var(--muted);margin:10px 0 0">Minting is gated on-chain, not by this page. When <span class="mono">mint()</span> is called, the contract runs three checks in order — and reverts if any one fails:</p>
+<ol style="margin:12px 0 0;padding-left:20px;color:var(--muted);font-weight:600">
+<li style="margin-bottom:8px"><strong style="color:var(--ink)">Caller is a Binance Agentic Wallet.</strong> The call must come from the agentic wallet you control in the Binance Wallet app. Calls routed through a regular wallet app are turned away.</li>
+<li style="margin-bottom:8px"><strong style="color:var(--ink)">That wallet holds a claimed Agent ID.</strong> The Agent ID you claimed under <em>Binance Wallet → Agentic Wallet</em> (issued via SPACE ID) is looked up against the caller. An agentic wallet that never claimed its Agent ID is rejected.</li>
+<li><strong style="color:var(--ink)">Caller is not another contract.</strong> Smart-contract callers are refused outright, so bots and proxy contracts cannot mint around the gate.</li>
+</ol>
+<p style="color:var(--muted);margin:12px 0 0">In short: <strong style="color:var(--ink)">ordinary wallets and other contracts are turned away</strong> — only an agent acting through its Binance Agentic Wallet, with its Agent ID claimed, can mint an Eonvera.</p>
+<div style="margin-top:14px"><label for="agentIdInput" style="font-weight:700;font-size:14px">Preview-check your Agent ID</label>
+<p style="color:var(--muted);font-size:13.5px;margin:4px 0 8px">Paste the Agent ID exactly as shown in the Binance Wallet app under Agentic Wallet. This is a local format preview only — the binding check is the on-chain lookup at mint time.</p>
+<div class="checkrow"><input id="agentIdInput" placeholder="Your Agent ID from the Binance Wallet app" autocomplete="off" autocapitalize="none" spellcheck="false"><button class="btn" id="checkAgentId">Check Agent ID</button></div>
+<p id="agentIdResult" class="mono" style="font-size:13px;margin:10px 0 0"></p></div>
+</div>
+
+<div class="grid2">
+<div class="panel"><div class="panel-head"><strong>Prompt for your agent</strong><button class="btn lime small copyBtn" data-copy="promptMint" style="font-size:13px">Copy</button></div>
+<pre id="promptMint">Mint one Eonvera (single series, works 1 to 3,333) on BNB Chain (chain id 56).
+
+Act only through my Binance Agentic Wallet, using the Agent ID
+I claimed in the Binance Wallet app under Agentic Wallet.
+Do not use a regular wallet — the contract rejects it.
+
+Contract: 0x0000000000000000000000000000000000000000  ← PLACEHOLDER, replace with the deployed address
+
+Call mint() with calldata 0x1249c58b.
+Value: read currentPrice() on the contract and send exactly that.</pre></div>
+<div class="panel"><div class="panel-head"><strong>baw CLI</strong><button class="btn lime small copyBtn" data-copy="cliMint" style="font-size:13px">Copy</button></div>
+<pre id="cliMint">baw contract-call preview --binanceChainId 56 \
+  --from &lt;your agentic wallet&gt; \
+  --to 0x0000000000000000000000000000000000000000 \
+  --value &lt;currentPrice() in wei&gt; --inputData 0x1249c58b --json
+
+baw contract-call execute --requestId &lt;requestId&gt; --json</pre></div>
+</div>
+
+<div class="panel" style="margin-top:16px"><strong>Check an Agentic Wallet address</strong><p style="color:var(--muted);margin:6px 0 12px">Paste your <strong>Binance Agentic Wallet</strong> address to check its format. A valid format is only step one — the mint also requires the Agent ID claimed on that wallet, verified on-chain (see the Agent ID gate above). A regular wallet address will pass this format check but still be turned away by the contract at mint.</p>
+<div class="checkrow"><input id="walletInput" placeholder="0x… (your Agentic Wallet address)" autocomplete="off" autocapitalize="none" spellcheck="false"><button class="btn" id="checkWallet">Check Address</button></div><p id="walletResult" class="mono" style="font-size:13px;margin:10px 0 0"></p></div>
+</div></section>
+
+<section id="claim"><div class="wrap">
+<span class="kicker">Article III — Claim</span>
+<h2>Every work claims $EONV.</h2>
+<p class="sub">Every minted Eonvera can claim <strong>200,000 $EONV, once</strong>. The claim is bound to the work: sell the work before claiming and the claim moves with it; claim first and that work is spent forever. Claims close on <strong>February 14, 2027 at 00:00 UTC</strong>.</p>
+<div class="grid2">
+<div class="panel">
+<div class="claim-rows">
+<div><span>Per work</span><strong class="mono">200,000 $EONV</strong></div>
+<div><span>Claimed (preview)</span><strong>0 / 3,333</strong></div>
+</div>
+<div class="progress"><i style="width:1%"></i></div>
+<p class="mono" style="font-size:13px">Closes in: <strong id="countdown">—</strong></p>
+<p style="color:var(--muted);font-size:14px;margin-bottom:0">Claims run through your Binance agent, just like minting. A small anti-Sybil fee in BNB applies per claim — shown in your wallet before you sign.</p>
+</div>
+<div class="panel"><div class="panel-head"><strong>Claim prompt for your agent</strong><button class="btn lime small copyBtn" data-copy="promptClaim" style="font-size:13px">Copy</button></div>
+<pre id="promptClaim">Claim the $EONV for my Eonvera on BNB Chain (chain id 56).
+
+For each of my Eonvera works that has not claimed yet:
+read claimFee() on the claim contract, preview the transaction,
+then call claim(tokenId) with exactly that value.
+Each work claims 200,000 $EONV, once.</pre>
+<div style="margin-top:14px"><label for="tokenInput" style="font-weight:700;font-size:14px">Check a work number</label><div class="checkrow" style="margin-top:8px"><input id="tokenInput" type="number" inputmode="numeric" placeholder="Example: 1234"><button class="btn" id="checkToken">Check</button></div><p id="tokenResult" class="mono" style="font-size:13px;margin:10px 0 0"></p></div>
+</div>
+</div>
+<p class="mono" style="font-size:12px;color:var(--muted);margin-top:16px">Token: 0x000…0000 (placeholder) • Claim contract: 0x000…0000 (placeholder) • Replace &amp; link to BscScan after deployment.</p>
+</div></section>
+
+<section id="gallery"><div class="wrap">
+<span class="kicker">Article IV — Gallery</span>
+<h2>Eras that have already been born.</h2>
+<p class="sub">The previews below are drawn live in your browser with the Eon Engine — the same laws, seeds &amp; palettes the on-chain works will use. The mainnet gallery will show the real works + their owners after the first mint.</p>
+<div class="gallery" id="galleryGrid"></div>
+</div></section>
+
+<section><div class="wrap">
+<span class="kicker">Article V — Exchange &amp; Programme</span>
+<h2>Market &amp; curatorial programme.</h2>
+<div class="grid2">
+<div class="panel"><h3 style="margin-top:0">The Market</h3><p style="color:var(--muted)">A home for trading Eonvera — every minted work and its owner in one place. Buying, selling &amp; offers open through BNB Chain marketplaces once the single-series mint is under way. The opening date will be announced.</p><span class="pill">Status: Not yet open</span></div>
+<div class="panel"><h3 style="margin-top:0">A Curatorial Programme</h3><p style="color:var(--muted)">Five movements, from genesis to motion: how this edition circulates, is catalogued, studied, and placed in time. Genesis → Circulation → Catalogue → Study → Motion.</p><span class="pill">Programme document: coming soon</span></div>
+</div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+<span class="kicker">Notes — FAQ</span><h2>Questions that come up often.</h2>
+<details open><summary>Why can only agents mint?</summary><p style="color:var(--muted)">Eonvera is about laws that run without human hands, so it is minted by software acting on its own. The contract requires a Binance Agentic Wallet holding an Agent ID claimed in the Binance Wallet app (issued via SPACE ID). Connect a regular wallet instead and there is nothing to mint with — the call never gets past the gate.</p></details>
+<details><summary>What happens if I mint from a regular wallet or another contract?</summary><p style="color:var(--muted)">The transaction reverts. The contract checks that the caller is a Binance Agentic Wallet, that the wallet holds a claimed Agent ID, and that the caller is not another smart contract. Ordinary wallets and contract callers fail those checks and are turned away — no Eonvera is minted and no price is taken, though the failed transaction still costs its network gas.</p></details>
+<details><summary>Where do I claim an Agent ID?</summary><p style="color:var(--muted)">In the Binance Wallet app: open your Agentic Wallet and claim the Agent ID shown there. That claim is what the Eonvera contract verifies on-chain when your agent calls <span class="mono">mint()</span>.</p></details>
+<details><summary>What decides my work?</summary><p style="color:var(--muted)">A seed made from the block and your address at mint. That seed picks the form, the law, the starting row, and the palette. The same seed always draws the same work.</p></details>
+<details><summary>Where does the work live?</summary><p style="color:var(--muted)">The seed is stored on BNB Chain. The drawing code is open and runs on this page, so anyone can redraw any Eonvera from its number.</p></details>
+<details><summary>What do I get?</summary><p style="color:var(--muted)">A work of art and a way to study it, plus one claim of 200,000 $EONV per work, recorded on-chain. Nothing beyond that is promised.</p></details>
+<details><summary>What is the mint price?</summary><p style="color:var(--muted)">The price is read directly from the contract via <span class="mono">currentPrice()</span> at mint — your agent reads it and shows it in your wallet before you sign. This page does not lock in a price figure.</p></details>
+</div></section>
+</main>
+
+<footer><div class="wrap footer-grid">
+<div><div class="logo" style="margin-right:0"><i>◉</i> EONVERA</div><p style="color:var(--muted);max-width:420px;font-size:14px">Small seeds. Endless eras. 3,333 generative works on BNB Chain, minted only by agents.</p></div>
+<div class="mono" style="font-size:12px;line-height:2">BNB CHAIN — CHAIN ID 56<br>CONTRACT: PLACEHOLDER — NOT YET DEPLOYED<br>© 2026 EONVERA</div>
+</div></footer>
+<div class="toast" id="toast">Copied ✓</div>
+
+<script>
+function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2200)}
+// Cellular automata engine
+function drawCA(canvas, rule, seedCenter, palette){
+  var ctx=canvas.getContext('2d'); var W=canvas.width,H=canvas.height; var cell=8; var cols=Math.floor(W/cell), rows=Math.floor(H/cell);
+  ctx.fillStyle='#0d120e'; ctx.fillRect(0,0,W,H);
+  var cur=new Array(cols).fill(0); cur[seedCenter%cols]=1; if(seedCenter>10){cur[(seedCenter*7)%cols]=1;cur[(seedCenter*13)%cols]=1;}
+  for(var y=0;y<rows;y++){
+    for(var x=0;x<cols;x++){ if(cur[x]){ ctx.fillStyle=palette[y%palette.length]; ctx.fillRect(x*cell,y*cell,cell-1,cell-1);} }
+    var nxt=new Array(cols).fill(0);
+    for(var i=0;i<cols;i++){ var l=cur[(i-1+cols)%cols],c=cur[i],r=cur[(i+1)%cols]; var idx=(l<<2)|(c<<1)|r; nxt[i]=(rule>>idx)&1; }
+    cur=nxt;
+  }
+}
+var palettes=[['#c6f24a','#3ddbb0','#eef2e6','#ff9f1c'],['#ff4d2e','#ffb84d','#c6f24a','#ffffff'],['#3ddbb0','#0e7a66','#c6f24a','#f2f0e9']];
+drawCA(document.getElementById('heroCanvas'),150,42,palettes[0]);
+setInterval(function(){ drawCA(document.getElementById('heroCanvas'), [150,110,90,30][Math.floor(Math.random()*4)], Math.floor(Math.random()*80)+10, palettes[Math.floor(Math.random()*palettes.length)]); }, 5000);
+
+var currentRule=150, currentSeed=36;
+var bitsEl=document.getElementById('ruleBits');
+function renderBits(){
+  bitsEl.innerHTML=''; document.getElementById('ruleNum').textContent=currentRule;
+  for(var idx=7; idx>=0; idx--){
+    var l=(idx>>2)&1,c=(idx>>1)&1,r=idx&1; var on=(currentRule>>idx)&1;
+    var d=document.createElement('div'); d.className='bit';
+    d.innerHTML='<div class="cells"><span class="c '+(l?'on':'')+'"></span><span class="c '+(c?'on':'')+'"></span><span class="c '+(r?'on':'')+'"></span></div>';
+    var b=document.createElement('button'); b.textContent=on?'● LIVE':'○ DIE'; if(on)b.className='on'; b.setAttribute('data-idx',idx);
+    b.onclick=function(){ var i=+this.getAttribute('data-idx'); currentRule ^= (1<<i); renderBits(); drawCA(document.getElementById('bigCanvas'),currentRule,currentSeed,palettes[0]); };
+    d.appendChild(b); bitsEl.appendChild(d);
+  }
+}
+renderBits(); drawCA(document.getElementById('bigCanvas'),currentRule,currentSeed,palettes[0]);
+document.querySelectorAll('[data-rule]').forEach(function(btn){ btn.addEventListener('click',function(){ currentRule=+btn.getAttribute('data-rule'); renderBits(); drawCA(document.getElementById('bigCanvas'),currentRule,currentSeed,palettes[0]); }); });
+document.getElementById('randomSeed').addEventListener('click',function(){ currentSeed=Math.floor(Math.random()*70)+5; drawCA(document.getElementById('bigCanvas'),currentRule,currentSeed,palettes[Math.floor(Math.random()*palettes.length)]); toast('New seed: #'+currentSeed); });
+
+// Gallery - procedural previews
+var works=[{n:1,rule:150,era:'Single Series • Fractal'},{n:2,rule:110,era:'Single Series • Complex'},{n:3,rule:90,era:'Single Series • Fractal'},{n:4,rule:30,era:'Single Series • Chaos'},{n:5,rule:184,era:'Single Series • Still'},{n:6,rule:54,era:'Single Series • Complex'}];
+var grid=document.getElementById('galleryGrid');
+works.forEach(function(w,i){
+  var card=document.createElement('article'); card.className='work';
+  card.innerHTML='<canvas width="600" height="380"></canvas><div><strong>EONVERA #'+w.n+' — Preview</strong><br><span style="color:var(--muted);font-size:13px">'+w.era+' • Rule '+w.rule+' • Waiting for its first agent</span></div>';
+  grid.appendChild(card); drawCA(card.querySelector('canvas'), w.rule, 20+i*11, palettes[i%palettes.length]);
+});
+
+// Copy
+document.querySelectorAll('.copyBtn').forEach(function(b){ b.addEventListener('click',function(){ var txt=document.getElementById(b.getAttribute('data-copy')).textContent; if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(function(){toast('Copied to clipboard ✓')}); } else { toast('Copy manually from the text box'); } }); });
+
+// Wallet / token checks (local format check only)
+document.getElementById('checkWallet').addEventListener('click',function(){
+  var v=document.getElementById('walletInput').value.trim(); var out=document.getElementById('walletResult');
+  if(/^0x[a-fA-F0-9]{40}$/.test(v)){ out.textContent='✓ Valid address format: '+v.slice(0,6)+'…'+v.slice(-4)+' — remember: format alone is not enough. Minting requires this to be a Binance Agentic Wallet with a claimed Agent ID, checked on-chain at mint.'; out.style.color='var(--teal)'; }
+  else { out.textContent='✕ Invalid format — a BNB Chain address must be 0x + 40 hex characters.'; out.style.color='#dc2626'; }
+});
+document.getElementById('checkToken').addEventListener('click',function(){
+  var v=parseInt(document.getElementById('tokenInput').value,10); var out=document.getElementById('tokenResult');
+  if(!v){ out.textContent='Enter a work number first.'; return; }
+  if(v>=1 && v<=3333){ out.textContent='#'+v+' — Eonvera single series. Claim status is read on-chain by your agent.'; }
+  else { out.textContent='#'+v+' is outside the 1–3,333 range.'; }
+});
+// Agent ID preview check (local only — the binding check is on-chain)
+document.getElementById('checkAgentId').addEventListener('click',function(){
+  var v=document.getElementById('agentIdInput').value.trim(); var out=document.getElementById('agentIdResult');
+  if(!v){ out.textContent='Paste your Agent ID first — you will find it in the Binance Wallet app, under Agentic Wallet.'; out.style.color='#dc2626'; return; }
+  if(v.length>=4 && !/\s/.test(v)){ out.textContent='✓ Format looks plausible for "'+v+'" — preview only. At mint, the contract looks this Agent ID up against your Binance Agentic Wallet on-chain; a mismatch, an unclaimed ID, or a regular wallet is reverted.'; out.style.color='var(--teal)'; }
+  else { out.textContent='✕ That does not look like the Agent ID shown in the app — copy it exactly from Binance Wallet → Agentic Wallet, with no spaces.'; out.style.color='#dc2626'; }
+});
+// Connect Binance Agentic Wallet (preview flow with Agent ID check step)
+var connected=false, connecting=false;
+document.getElementById('connectBtn').addEventListener('click',function(){
+  var btn=this, status=document.getElementById('contractStatus');
+  if(connecting){ return; }
+  if(connected){
+    connected=false; btn.textContent='Connect Binance Agentic Wallet';
+    status.textContent='Preview — not connected to mainnet';
+    toast('Binance Agentic Wallet disconnected'); return;
+  }
+  connecting=true; btn.textContent='⏳ Checking Agent ID…';
+  status.textContent='Preview — checking the Agent ID claimed on this Binance Agentic Wallet…';
+  toast('Preview: verifying the Agent ID claimed in the Binance Wallet app');
+  setTimeout(function(){
+    connecting=false; connected=true;
+    btn.textContent='◉ Agentic Wallet Connected — Agent ID ✓ (Preview)';
+    status.textContent='Preview — Binance Agentic Wallet connected locally, Agent ID check passed (simulated), no transaction yet';
+    toast('Preview: Agentic Wallet connected, Agent ID check passed');
+  },1400);
+});
+var minted=0;
+document.getElementById('simulateMint').addEventListener('click',function(){
+  if(!connected){ toast('Connect your Binance Agentic Wallet first — and make sure its Agent ID is claimed'); return; }
+  minted++; document.getElementById('mintedCount').textContent=minted;
+  document.getElementById('mintBar').style.width=Math.max(2,(minted/3333*100))+'%';
+  toast('Preview mint #'+minted+' simulated successfully — not an on-chain transaction');
+});
+// Countdown to Feb 14, 2027 00:00 UTC
+function tick(){
+  var target=Date.UTC(2027,1,14,0,0,0); var diff=target-Date.now(); var el=document.getElementById('countdown');
+  if(diff<0){ el.textContent='Claims closed'; return; }
+  var d=Math.floor(diff/86400000), h=Math.floor(diff/3600000)%24, m=Math.floor(diff/60000)%60, s=Math.floor(diff/1000)%60;
+  el.textContent=d+'d '+h+'h '+m+'m '+s+'s';
+}
+tick(); setInterval(tick,1000);
+</script>
+</body>
+</html>
