@@ -216,7 +216,9 @@ footer{padding:32px 0 calc(48px + env(safe-area-inset-bottom));border-top:2px so
 @keyframes tickmove{to{transform:translateX(-50%)}}
 
 /* ---------- Mobile action bar ---------- */
-.mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);border-top:2px solid var(--ink)}
+.mobilebar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);border-top:2px solid var(--ink);max-width:100vw}
+.mobilebar .btn{white-space:nowrap}
+a[href*="bscscan.com"]{overflow-wrap:anywhere}
 .mobilebar .info{flex:1;min-width:0}
 .mobilebar .info strong{font-family:Unbounded,sans-serif;font-size:13px;display:block;line-height:1.25}
 .mobilebar .info span{font-size:11.5px;color:var(--muted);font-weight:700}
@@ -328,7 +330,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 <main id="top">
 <div class="wrap hero">
-<span class="eyebrow"><b></b> BNB Chain • Agent-Only • Live (Preview)</span>
+<span class="eyebrow"><b></b> BNB Chain • Agent-Only • Contract Deployed • Mint Closed</span>
 <h1>Time written<br>by <em>machines,</em><br>minted by agents.</h1>
 <p class="lead">Eonvera is 3,333 generative works on BNB Chain. Every work is born from a single <em>seed</em> at the moment of mint — deciding its era, palette, and time-pattern. There is no public mint. Only a Binance Agentic Wallet holding an Agent ID is accepted by the contract.</p>
 <div class="hero-cta"><a class="btn lime" href="#mint">Start Minting via Agent ↓</a><a class="btn ghost" href="#engine">Try the Engine</a></div>
@@ -347,7 +349,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 <div class="stat"><strong>56</strong><span>Chain ID — BNB Chain</span></div>
 </div>
 <div class="pillrow"><span class="pill">◉ Cellular time-patterns</span><span class="pill">◎ On-chain seed</span><span class="pill">⬢ SPACE ID Agent ID</span><span class="pill">⬣ Open drawing code</span></div>
-<p class="note"><strong>Page status:</strong> This is a launch page with preview data. The contract address, price &amp; minted figures below are structured placeholders — replace them with live contract reads when Eonvera deploys on mainnet.</p>
+<p class="note"><strong>Contract deployed:</strong> Eonvera is live on BNB Chain mainnet at <a href="https://bscscan.com/address/0xeF5F124de6eabD2972728A4058D7379d57c423DA" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">0xeF5F…23DA on BscScan ↗</a>. Mint price is set on-chain at 0.0003 BNB. Minting is still closed — 0 / 3,333 minted — until the owner opens it.</p>
 </div>
 </div>
 </div>
@@ -388,13 +390,13 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 <section id="mint"><div class="wrap">
 <span class="kicker">Article II — Mint</span>
 <h2>Only agents may mint.</h2>
-<p class="sub">The contract accepts exactly one kind of caller: a <strong>Binance Agentic Wallet</strong> holding a claimed <strong>Agent ID</strong>. There is no generic wallet connect — a regular wallet (MetaMask, Trust Wallet, a plain EOA) cannot mint, and calls from other smart contracts are rejected on-chain. A single series (works 1–3,333) is minting now — one work per call, no per-wallet limit.</p>
+<p class="sub">The contract accepts exactly one kind of caller: a <strong>Binance Agentic Wallet</strong> holding a claimed <strong>Agent ID</strong>. There is no generic wallet connect — a regular wallet (MetaMask, Trust Wallet, a plain EOA) cannot mint, and calls from other smart contracts are rejected on-chain. A single series (works 1–3,333) is deployed — minting opens only when the owner opens it: one work per call, no per-wallet limit.</p>
 
 <div class="panel" style="margin-top:22px">
-<div class="mint-head"><strong>Eonvera — Single Series • Minted <span id="mintedCount">0</span> / 3,333</strong><span>Remaining 3,333 • Status: <span id="contractStatus">Preview — not connected to mainnet</span></span></div>
+<div class="mint-head"><strong>Eonvera — Single Series • Minted <span id="mintedCount">0</span> / 3,333</strong><span>Remaining 3,333 • Status: <span id="contractStatus">Deployed on mainnet — mint closed</span></span></div>
 <div class="progress"><i id="mintBar" style="width:2%"></i></div>
-<div class="mint-actions"><button class="btn lime" id="simulateMint">Mint via Agent (Preview)</button><span class="mono" style="font-size:12px" id="priceLabel">Price: read currentPrice() on-chain</span></div>
-<p class="note">The button above previews the flow — it is not a real transaction. Actual minting is done by your agent through the prompt / CLI below. <strong>Contract address: 0x000…0000 — PLACEHOLDER</strong>, and the price is read from <span class="mono">currentPrice()</span> at mint time; both are replaced with the real deployment values once they exist.</p>
+<div class="mint-actions"><button class="btn lime" id="simulateMint">Mint via Agent (Preview)</button><span class="mono" style="font-size:12px" id="priceLabel">Price: 0.0003 BNB — via currentPrice() on-chain</span></div>
+<p class="note">The button above previews the flow — it is not a real transaction. Actual minting is done by your agent through the prompt / CLI below, once the mint opens. <strong>Contract address: <a href="https://bscscan.com/address/0xeF5F124de6eabD2972728A4058D7379d57c423DA" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">0xeF5F…23DA ↗</a></strong> — deployed on BNB Chain mainnet. Price is 0.0003 BNB, read from <span class="mono">currentPrice()</span> at mint time. <strong>Mint is currently closed.</strong></p>
 </div>
 
 <div class="steps">
@@ -426,14 +428,15 @@ Act only through my Binance Agentic Wallet, using the Agent ID
 I claimed in the Binance Wallet app under Agentic Wallet.
 Do not use a regular wallet — the contract rejects it.
 
-Contract: 0x0000000000000000000000000000000000000000  ← PLACEHOLDER, replace with the deployed address
+Contract: 0xeF5F124de6eabD2972728A4058D7379d57c423DA
+Note: mint is currently closed — only call mint() once the owner opens it.
 
 Call mint() with calldata 0x1249c58b.
 Value: read currentPrice() on the contract and send exactly that.</pre></div>
 <div class="panel"><div class="panel-head"><strong>baw CLI</strong><button class="btn lime small copyBtn" data-copy="cliMint" style="font-size:13px">Copy</button></div>
 <pre id="cliMint">baw contract-call preview --binanceChainId 56 \
   --from &lt;your agentic wallet&gt; \
-  --to 0x0000000000000000000000000000000000000000 \
+  --to 0xeF5F124de6eabD2972728A4058D7379d57c423DA \
   --value &lt;currentPrice() in wei&gt; --inputData 0x1249c58b --json
 
 baw contract-call execute --requestId &lt;requestId&gt; --json</pre></div>
@@ -494,18 +497,18 @@ baw contract-call execute --requestId &lt;requestId&gt; --json</pre></div>
 <li>Gallery previews are drawn by the same engine the on-chain works will use</li>
 </ul>
 </div></div>
-<div class="phase next"><span class="dot"></span><div class="phase-card">
-<div class="phase-head"><span class="phase-num">Phase 02 — Deployment</span><span class="status next">Up next</span></div>
-<h3>The contract goes on-chain</h3>
-<p>The single-series contract is deployed to BNB Chain mainnet, with the Agent ID gate enforced on-chain.</p>
+<div class="phase live"><span class="dot"></span><div class="phase-card">
+<div class="phase-head"><span class="phase-num">Phase 02 — Deployment</span><span class="status live">Deployed</span></div>
+<h3>The contract is on-chain</h3>
+<p>The single-series contract is deployed to BNB Chain mainnet, with the Agent ID gate enforced on-chain. Minting remains closed until the owner opens it.</p>
 <ul>
-<li>The real contract address is published here, replacing the placeholder</li>
-<li>This page reads the minted count &amp; <span class="mono">currentPrice()</span> live from the contract</li>
-<li>The Binance Agentic Wallet + Agent ID checks are verified against mainnet</li>
+<li>Contract: <a href="https://bscscan.com/address/0xeF5F124de6eabD2972728A4058D7379d57c423DA" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">0xeF5F…23DA on BscScan ↗</a></li>
+<li>On-chain state verified: Eonvera / EONV, supply 3,333, price 0.0003 BNB, 0 minted, mint closed, royalty 5% to treasury</li>
+<li>Next owner steps: verify the source on BscScan, allowlist the Agentic Wallet, then open the mint when ready</li>
 </ul>
 </div></div>
-<div class="phase"><span class="dot"></span><div class="phase-card">
-<div class="phase-head"><span class="phase-num">Phase 03 — The Mint</span><span class="status">Planned</span></div>
+<div class="phase next"><span class="dot"></span><div class="phase-card">
+<div class="phase-head"><span class="phase-num">Phase 03 — The Mint</span><span class="status next">Up next</span></div>
 <h3>Agent-only mint opens</h3>
 <p>Works 1–3,333 open for minting — by agents only, exactly as the contract demands.</p>
 <ul>
@@ -545,7 +548,7 @@ baw contract-call execute --requestId &lt;requestId&gt; --json</pre></div>
 <details><summary>What decides my work?</summary><p style="color:var(--muted)">A seed made from the block and your address at mint. That seed picks the form, the law, the starting row, and the palette. The same seed always draws the same work.</p></details>
 <details><summary>Where does the work live?</summary><p style="color:var(--muted)">The seed is stored on BNB Chain. The drawing code is open and runs on this page, so anyone can redraw any Eonvera from its number.</p></details>
 <details><summary>What do I get?</summary><p style="color:var(--muted)">A work of art and a way to study it — its seed and ownership recorded on-chain. Nothing beyond that is promised.</p></details>
-<details><summary>What is the mint price?</summary><p style="color:var(--muted)">The price is read directly from the contract via <span class="mono">currentPrice()</span> at mint — your agent reads it and shows it in your wallet before you sign. This page does not lock in a price figure.</p></details>
+<details><summary>What is the mint price?</summary><p style="color:var(--muted)">The mint price is set on-chain at <strong style="color:var(--ink)">0.0003 BNB</strong> per work, read directly from the contract via <span class="mono">currentPrice()</span> at mint — your agent reads it and shows it in your wallet before you sign.</p></details>
 <details><summary>When does the market open?</summary><p style="color:var(--muted)">After the genesis mint begins — a work can only be listed, offered on, or sold once it has been minted and has an owner. Until then the <a href="#market">market section</a> shows live engine previews of the works, with no prices, because no real listings exist yet.</p></details>
 <details><summary>What is on the roadmap?</summary><p style="color:var(--muted)">Five phases: the Eon Engine (live now), contract deployment on BNB Chain, the agent-only mint, the market opening, and finally the catalogue &amp; curatorial programme. Eonvera ships in phases rather than on promised dates — see the <a href="#roadmap">roadmap</a> for the current status of each phase.</p></details>
 </div></section>
@@ -554,7 +557,7 @@ baw contract-call execute --requestId &lt;requestId&gt; --json</pre></div>
 <footer><div class="wrap footer-grid">
 <div><div class="logo" style="margin-right:0"><i>◉</i> EONVERA</div><p style="color:var(--muted);max-width:420px;font-size:14px">Small seeds. Endless eras. 3,333 generative works on BNB Chain, minted only by agents.</p>
 <p style="margin:14px 0 0;font-size:14px"><strong>Official account</strong><br><a class="x-official" href="https://x.com/eonvera" target="_blank" rel="noopener noreferrer" aria-label="Follow Eonvera on X — @eonvera"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex:none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span>@eonvera on X</span><span aria-hidden="true">↗</span></a></p></div>
-<div class="mono" style="font-size:12px;line-height:2">BNB CHAIN — CHAIN ID 56<br>CONTRACT: PLACEHOLDER — NOT YET DEPLOYED<br>OFFICIAL X: <a href="https://x.com/eonvera" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">x.com/eonvera</a><br>© 2026 EONVERA</div>
+<div class="mono" style="font-size:12px;line-height:2">BNB CHAIN — CHAIN ID 56<br>CONTRACT: <a href="https://bscscan.com/address/0xeF5F124de6eabD2972728A4058D7379d57c423DA" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">0xeF5F…23DA ↗</a> — DEPLOYED, MINT CLOSED<br>OFFICIAL X: <a href="https://x.com/eonvera" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">x.com/eonvera</a><br>© 2026 EONVERA</div>
 </div></footer>
 <div class="modal" id="workModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Work inspector">
 <div class="modal-card">
@@ -649,7 +652,7 @@ document.getElementById('connectBtn').addEventListener('click',function(){
   if(connecting){ return; }
   if(connected){
     connected=false; btn.textContent='Connect Binance Agentic Wallet';
-    status.textContent='Preview — not connected to mainnet';
+    status.textContent='Deployed on mainnet — mint closed';
     toast('Binance Agentic Wallet disconnected'); return;
   }
   connecting=true; btn.textContent='⏳ Checking Agent ID…';
