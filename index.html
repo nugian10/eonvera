@@ -229,6 +229,92 @@ section[id]{scroll-margin-top:118px}
   section[id]{scroll-margin-top:84px}
 }
 @media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}.ticker-track{animation:none}}
+
+/* ---------- Mobile-first refinement (phones are the primary surface) ---------- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (max-width:860px){
+  /* Compact two-row header: logo + connect on row one, nav on row two.
+     The old layout wrapped the long connect label onto its own row and
+     pushed page content far down the screen. */
+  .nav{gap:8px;padding:8px 0 4px;flex-wrap:wrap}
+  .logo{font-size:16px;gap:7px;letter-spacing:-.01em}
+  .logo i{width:28px;height:28px;font-size:13px;border-width:1.5px}
+  #connectBtn{font-size:12px;line-height:1.15;text-align:center;padding:8px 11px;min-height:40px;max-width:57%;flex:none}
+  /* Nav becomes one slim swipeable strip instead of wrapping to two rows */
+  .navlinks{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;gap:6px;width:100%;padding:2px 2px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,#000 93%,transparent);mask-image:linear-gradient(90deg,#000 93%,transparent)}
+  .navlinks::-webkit-scrollbar{display:none}
+  .navlinks a{flex:none;min-height:40px;padding:8px 12px;font-size:12.5px;touch-action:manipulation}
+  section[id]{scroll-margin-top:104px}
+  /* Hero tuned for one-thumb reading */
+  .hero{padding:22px 0 18px}
+  .eyebrow{font-size:10.5px;padding:5px 10px;letter-spacing:.05em}
+  h1{font-size:clamp(31px,9.4vw,40px);margin:14px 0 12px}
+  .lead{font-size:16px;line-height:1.55}
+  .hero-cta{margin-top:16px;gap:8px}
+  .hero-grid{gap:14px;margin-top:20px}
+  .orbital{padding:14px;border-radius:18px}
+  .orbital canvas{height:190px}
+  .orbital-meta{font-size:11.5px;margin-top:10px}
+  .stats{gap:8px}
+  .stat{padding:12px;border-radius:14px}
+  .stat strong{font-size:21px}
+  .stat span{font-size:11.5px}
+  .pillrow{gap:6px;margin-top:12px}
+  .pill{font-size:11.5px;padding:6px 9px}
+  /* Sections & panels: tighter rhythm, comfortable thumbs */
+  section{padding:36px 0}
+  h2{font-size:clamp(24px,6.8vw,32px)}
+  .sub{font-size:15px}
+  .grid2{gap:14px;margin-top:18px}
+  .panel{padding:16px;border-radius:16px}
+  .rulebits{gap:10px 4px}
+  .bit .c{width:14px;height:14px}
+  .bit button{min-height:44px;font-size:12px}
+  #bigCanvas{height:220px}
+  .rule-actions{gap:8px}
+  .rule-actions .btn{flex:1 1 42%}
+  .steps{gap:10px}
+  .step{padding:15px}
+  .gallery{gap:12px;margin-top:16px}
+  .work{border-radius:16px}
+  .work canvas{height:175px}
+  .work div{padding:12px}
+  .work .btn{min-height:48px}
+  pre{font-size:11px;padding:12px;line-height:1.55}
+  .note{font-size:12.5px}
+  details{padding:10px 14px}
+  summary{padding:6px 0}
+  /* Market & roadmap on phones */
+  .mkt-stats{gap:8px;margin-top:16px}
+  .mkt-tools{gap:10px;margin-top:16px}
+  .filterrow{gap:6px}
+  .chip{min-height:44px;padding:9px 13px;flex:1 1 auto;text-align:center}
+  .chip[data-era="all"]{flex:1 1 100%}
+  .phase-card{padding:16px;border-radius:16px}
+  .phase h3{font-size:17px}
+  .phase{padding-bottom:14px}
+  /* Bottom sheet & sticky mint bar respect phone browser chrome */
+  .modal-card{max-height:92dvh;padding:16px 16px calc(16px + env(safe-area-inset-bottom))}
+  .modal-card canvas{height:200px}
+  .mobilebar{padding:8px 12px calc(8px + env(safe-area-inset-bottom));gap:10px}
+  .mobilebar .info strong{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mobilebar .info span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mobilebar .btn{flex:none;min-height:46px;padding:10px 14px;font-size:14px}
+  .toast{font-size:13px;padding:10px 14px}
+  .ticker-track{font-size:11px}
+  footer{padding-top:28px}
+}
+/* Very small phones (≤380px): keep the header on one row, type stays legible */
+@media (max-width:380px){
+  .wrap{padding:0 12px}
+  .logo{font-size:15px}
+  .logo i{width:26px;height:26px;font-size:12px}
+  #connectBtn{font-size:11.5px;padding:8px 9px;max-width:58%}
+  h1{font-size:29px}
+  .stat strong{font-size:19px}
+  .hero-cta .btn{font-size:14px}
+  .bit button{font-size:11px}
+}
 </style>
 </head>
 <body>
