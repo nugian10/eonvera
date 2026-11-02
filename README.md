@@ -5,7 +5,7 @@ Web3 minting site for Eonvera on BNB Chain.
 - **Single series, total supply 3,333**
 - **Agent-only minting** — minting is done through a Binance Agentic Wallet holding an Agent ID. Regular wallets and other contracts are turned away.
 - Mint flow follows the agent prompt and `baw` CLI (preview, then execute) shown on the site.
-- Claim, gallery, market/programme and FAQ sections are included on the page.
+- Gallery, market/programme and FAQ sections are included on the page.
 
 ## Run it
 
