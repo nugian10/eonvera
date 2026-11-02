@@ -107,6 +107,63 @@ footer{padding:32px 0 calc(48px + env(safe-area-inset-bottom));border-top:2px so
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom));background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:50;width:max-content;max-width:calc(100vw - 32px);text-align:center}
 .toast.show{opacity:1}
 
+/* ---------- Market ---------- */
+.mkt-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.mkt-tools{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.filterrow{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 14px;font-weight:800;font-size:13px;cursor:pointer;min-height:42px;font-family:Manrope,sans-serif;touch-action:manipulation}
+.chip.on{background:var(--lime);color:#10130f;border-color:var(--ink)}
+.sortrow{display:flex;align-items:center;gap:10px}
+.sortrow label{font-weight:800;font-size:13px;white-space:nowrap}
+.sortrow select{flex:1;min-width:0}
+.work div div{padding:0}
+.pricerow{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:5px 9px;background:var(--bg2);display:inline-block}
+.tag.wait{background:color-mix(in srgb,var(--amber) 20%, transparent)}
+.floor{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:600}
+.floor b{font-family:Unbounded,sans-serif;font-size:15px}
+.empty-note{border:1.5px dashed var(--line);border-radius:16px;padding:18px;color:var(--muted);font-weight:600}
+
+/* ---------- Roadmap ---------- */
+.road{position:relative;margin-top:28px;padding-left:28px}
+.road:before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--line);opacity:.3}
+.phase{position:relative;padding-bottom:18px}
+.phase:last-child{padding-bottom:0}
+.phase .dot{position:absolute;left:-28px;top:22px;width:18px;height:18px;border-radius:50%;border:2px solid var(--ink);background:var(--bg)}
+.phase.live .dot{background:var(--lime)}
+.phase.next .dot{background:var(--amber)}
+.phase-card{border:2px solid var(--ink);border-radius:18px;background:var(--card);padding:18px}
+.phase.live .phase-card{border-color:var(--teal)}
+.phase-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.phase-num{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--teal);font-weight:700;text-transform:uppercase}
+.status{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:999px;border:1.5px solid var(--ink);background:var(--bg2)}
+.status.live{background:var(--lime);color:#10130f}
+.status.next{background:var(--amber);color:#10130f}
+.phase h3{font-family:Unbounded,sans-serif;margin:8px 0 6px;font-size:19px;line-height:1.25}
+.phase p{margin:0;color:var(--muted);font-weight:600}
+.phase ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-weight:600}
+.phase li{margin-bottom:4px}
+
+/* ---------- Work inspector modal ---------- */
+.modal{position:fixed;inset:0;z-index:60;display:none;align-items:flex-end;justify-content:center;background:rgba(6,9,6,.62)}
+.modal.open{display:flex}
+.modal-card{background:var(--bg);color:var(--ink);width:100%;max-height:92vh;overflow:auto;border:2px solid var(--ink);border-bottom:none;border-radius:22px 22px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom))}
+.modal-card canvas{width:100%;height:230px;display:block;border-radius:12px;background:#0d120e;margin-top:12px}
+.spec{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.spec span{color:var(--muted);font-weight:700}
+.spec strong{text-align:right}
+@media (min-width:861px){
+  .mkt-stats{grid-template-columns:repeat(4,1fr)}
+  .mkt-tools{flex-direction:row;align-items:center;justify-content:space-between}
+  .sortrow select{width:220px;flex:none}
+  .road{padding-left:36px}
+  .phase .dot{left:-36px}
+  .phase-card{padding:22px}
+  .modal{align-items:center;padding:24px}
+  .modal-card{max-width:660px;border-radius:22px;border-bottom:2px solid var(--ink)}
+  .modal-card canvas{height:320px}
+}
+
 /* ---------- Wider screens ---------- */
 @media (min-width:560px){
   .hero-cta{flex-direction:row;flex-wrap:wrap}
@@ -177,7 +234,7 @@ section[id]{scroll-margin-top:118px}
 <body>
 <header><div class="wrap nav">
 <a class="logo" href="#top"><i>◉</i> EONVERA</a>
-<nav class="navlinks"><a href="#engine">Engine</a><a href="#mint">Mint</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></nav>
+<nav class="navlinks"><a href="#engine">Engine</a><a href="#mint">Mint</a><a href="#gallery">Gallery</a><a href="#market">Market</a><a href="#roadmap">Roadmap</a><a href="#faq">FAQ</a></nav>
 <button class="btn lime" id="connectBtn">Connect Binance Agentic Wallet</button>
 </div></header>
 
@@ -207,7 +264,7 @@ section[id]{scroll-margin-top:118px}
 </div>
 </div>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>AGENT-ONLY MINT ◆ BNB CHAIN — CHAIN ID 56 ◆ 3,333 WORKS — ONE SERIES ◆ SEED LOCKED ON-CHAIN ◆ THE EON ENGINE — RULE 150 ◆ NO PUBLIC MINT ◆</span><span>AGENT-ONLY MINT ◆ BNB CHAIN — CHAIN ID 56 ◆ 3,333 WORKS — ONE SERIES ◆ SEED LOCKED ON-CHAIN ◆ THE EON ENGINE — RULE 150 ◆ NO PUBLIC MINT ◆</span></div></div>
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>AGENT-ONLY MINT ◆ BNB CHAIN — CHAIN ID 56 ◆ 3,333 WORKS — ONE SERIES ◆ SEED LOCKED ON-CHAIN ◆ THE EON ENGINE — RULE 150 ◆ NO PUBLIC MINT ◆ THE MARKET — OPENS AFTER THE GENESIS MINT ◆ ROADMAP — FIVE PHASES, ENGINE LIVE NOW ◆</span><span>AGENT-ONLY MINT ◆ BNB CHAIN — CHAIN ID 56 ◆ 3,333 WORKS — ONE SERIES ◆ SEED LOCKED ON-CHAIN ◆ THE EON ENGINE — RULE 150 ◆ NO PUBLIC MINT ◆ THE MARKET — OPENS AFTER THE GENESIS MINT ◆ ROADMAP — FIVE PHASES, ENGINE LIVE NOW ◆</span></div></div>
 
 <section id="engine"><div class="wrap">
 <span class="kicker">Article I — The Eon Engine</span>
@@ -305,12 +362,90 @@ baw contract-call execute --requestId &lt;requestId&gt; --json</pre></div>
 <div class="gallery" id="galleryGrid"></div>
 </div></section>
 
-<section><div class="wrap">
-<span class="kicker">Article IV — Exchange &amp; Programme</span>
-<h2>Market &amp; curatorial programme.</h2>
-<div class="grid2">
-<div class="panel"><h3 style="margin-top:0">The Market</h3><p style="color:var(--muted)">A home for trading Eonvera — every minted work and its owner in one place. Buying, selling &amp; offers open through BNB Chain marketplaces once the single-series mint is under way. The opening date will be announced.</p><span class="pill">Status: Not yet open</span></div>
-<div class="panel"><h3 style="margin-top:0">A Curatorial Programme</h3><p style="color:var(--muted)">Five movements, from genesis to motion: how this edition circulates, is catalogued, studied, and placed in time. Genesis → Circulation → Catalogue → Study → Motion.</p><span class="pill">Programme document: coming soon</span></div>
+<section id="market"><div class="wrap">
+<span class="kicker">Article IV — The Market</span>
+<h2>Every era, one marketplace.</h2>
+<p class="sub">This is where minted Eonvera works will change hands. Trading opens once the genesis mint is under way — a work can only be listed after it exists. Until then, browse the preview works below: filter them by the era their law grows, sort them, and inspect exactly how each one is drawn.</p>
+<div class="mkt-stats">
+<div class="stat"><strong>0 / 3,333</strong><span>Works listed — the mint has not opened yet</span></div>
+<div class="stat"><strong>—</strong><span>Floor price — no listings exist yet</span></div>
+<div class="stat"><strong>—</strong><span>Total volume — trading is not open</span></div>
+<div class="stat"><strong>Post-mint</strong><span>The market opens after the genesis mint begins</span></div>
+</div>
+<div class="mkt-tools">
+<div class="filterrow" id="eraFilters" role="group" aria-label="Filter preview works by era">
+<button class="chip on" data-era="all">All eras</button>
+<button class="chip" data-era="Fractal">Fractal</button>
+<button class="chip" data-era="Complex">Complex</button>
+<button class="chip" data-era="Chaos">Chaos</button>
+<button class="chip" data-era="Still">Still</button>
+</div>
+<div class="sortrow"><label for="mktSort">Sort by</label><select id="mktSort"><option value="num">Work number</option><option value="ruleAsc">Rule — low to high</option><option value="ruleDesc">Rule — high to low</option></select></div>
+</div>
+<div class="gallery" id="marketGrid"></div>
+<p class="note"><strong>Preview listings only.</strong> These works are drawn live by the Eon Engine and are not minted yet, so nothing here can be bought or sold today — and no floor price is shown, because a price only exists once real listings do.</p>
+<div class="steps">
+<div class="step"><b>01</b><h3>A work is minted</h3><p style="color:var(--muted)">An agent mints the work through its Binance Agentic Wallet. Its seed &amp; owner are recorded on BNB Chain — only then can it enter the market.</p></div>
+<div class="step"><b>02</b><h3>The owner lists it</h3><p style="color:var(--muted)">The owner sets a price or opens the work to offers. The listing, the work's era &amp; law, and its seed history show on this page, in one place.</p></div>
+<div class="step"><b>03</b><h3>It settles on-chain</h3><p style="color:var(--muted)">Sales settle on BNB Chain through connected marketplaces. Ownership moves on-chain, and the work's provenance grows by one line — like its pattern.</p></div>
+</div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+<span class="kicker">Article V — Roadmap</span>
+<h2>The road from seed to catalogue.</h2>
+<p class="sub">Eonvera moves in phases, not on promised dates — a phase opens when the one before it is real, not when a calendar says so. The statuses below are where things honestly stand today.</p>
+<div class="road">
+<div class="phase live"><span class="dot"></span><div class="phase-card">
+<div class="phase-head"><span class="phase-num">Phase 01 — Genesis</span><span class="status live">Live now</span></div>
+<h3>The Eon Engine</h3>
+<p>The drawing law at the heart of Eonvera is finished and running in the open.</p>
+<ul>
+<li>The Eon Engine runs live on this page — the rules, seeds &amp; palettes are the real ones</li>
+<li>A single series, fixed forever at 3,333 works on BNB Chain</li>
+<li>Gallery previews are drawn by the same engine the on-chain works will use</li>
+</ul>
+</div></div>
+<div class="phase next"><span class="dot"></span><div class="phase-card">
+<div class="phase-head"><span class="phase-num">Phase 02 — Deployment</span><span class="status next">Up next</span></div>
+<h3>The contract goes on-chain</h3>
+<p>The single-series contract is deployed to BNB Chain mainnet, with the Agent ID gate enforced on-chain.</p>
+<ul>
+<li>The real contract address is published here, replacing the placeholder</li>
+<li>This page reads the minted count &amp; <span class="mono">currentPrice()</span> live from the contract</li>
+<li>The Binance Agentic Wallet + Agent ID checks are verified against mainnet</li>
+</ul>
+</div></div>
+<div class="phase"><span class="dot"></span><div class="phase-card">
+<div class="phase-head"><span class="phase-num">Phase 03 — The Mint</span><span class="status">Planned</span></div>
+<h3>Agent-only mint opens</h3>
+<p>Works 1–3,333 open for minting — by agents only, exactly as the contract demands.</p>
+<ul>
+<li><span class="mono">mint()</span> opens to Binance Agentic Wallets holding a claimed Agent ID</li>
+<li>One work per call, no per-wallet limit, price read from the contract at mint time</li>
+<li>Every minted work's seed &amp; owner appear in the gallery</li>
+</ul>
+</div></div>
+<div class="phase"><span class="dot"></span><div class="phase-card">
+<div class="phase-head"><span class="phase-num">Phase 04 — The Market</span><span class="status">Planned</span></div>
+<h3>The market opens</h3>
+<p>Minted works begin to circulate, with this page as their home.</p>
+<ul>
+<li>Owners list works for sale or open them to offers</li>
+<li>Floor price, volume &amp; ownership tracked in the <a href="#market">market section</a> above</li>
+<li>Sales settle on BNB Chain through connected marketplaces</li>
+</ul>
+</div></div>
+<div class="phase"><span class="dot"></span><div class="phase-card">
+<div class="phase-head"><span class="phase-num">Phase 05 — Catalogue</span><span class="status">Planned</span></div>
+<h3>Catalogue &amp; curatorial programme</h3>
+<p>The edition is catalogued, studied, and placed in time — the programme's five movements: Genesis → Circulation → Catalogue → Study → Motion.</p>
+<ul>
+<li>A complete catalogue of every minted era, redrawn from its on-chain seed</li>
+<li>Study tools: replay any work's growth line by line, law by law</li>
+<li>The curatorial programme document is published in full</li>
+</ul>
+</div></div>
 </div>
 </div></section>
 
@@ -323,6 +458,8 @@ baw contract-call execute --requestId &lt;requestId&gt; --json</pre></div>
 <details><summary>Where does the work live?</summary><p style="color:var(--muted)">The seed is stored on BNB Chain. The drawing code is open and runs on this page, so anyone can redraw any Eonvera from its number.</p></details>
 <details><summary>What do I get?</summary><p style="color:var(--muted)">A work of art and a way to study it — its seed and ownership recorded on-chain. Nothing beyond that is promised.</p></details>
 <details><summary>What is the mint price?</summary><p style="color:var(--muted)">The price is read directly from the contract via <span class="mono">currentPrice()</span> at mint — your agent reads it and shows it in your wallet before you sign. This page does not lock in a price figure.</p></details>
+<details><summary>When does the market open?</summary><p style="color:var(--muted)">After the genesis mint begins — a work can only be listed, offered on, or sold once it has been minted and has an owner. Until then the <a href="#market">market section</a> shows live engine previews of the works, with no prices, because no real listings exist yet.</p></details>
+<details><summary>What is on the roadmap?</summary><p style="color:var(--muted)">Five phases: the Eon Engine (live now), contract deployment on BNB Chain, the agent-only mint, the market opening, and finally the catalogue &amp; curatorial programme. Eonvera ships in phases rather than on promised dates — see the <a href="#roadmap">roadmap</a> for the current status of each phase.</p></details>
 </div></section>
 </main>
 
@@ -330,6 +467,21 @@ baw contract-call execute --requestId &lt;requestId&gt; --json</pre></div>
 <div><div class="logo" style="margin-right:0"><i>◉</i> EONVERA</div><p style="color:var(--muted);max-width:420px;font-size:14px">Small seeds. Endless eras. 3,333 generative works on BNB Chain, minted only by agents.</p></div>
 <div class="mono" style="font-size:12px;line-height:2">BNB CHAIN — CHAIN ID 56<br>CONTRACT: PLACEHOLDER — NOT YET DEPLOYED<br>© 2026 EONVERA</div>
 </div></footer>
+<div class="modal" id="workModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Work inspector">
+<div class="modal-card">
+<div class="panel-head"><strong id="modalTitle" style="font-family:Unbounded,sans-serif">EONVERA #1 — Preview</strong><button class="btn small ghost" id="modalClose">✕ Close</button></div>
+<canvas id="modalCanvas" width="900" height="520"></canvas>
+<div style="margin-top:8px">
+<div class="spec"><span>Era</span><strong id="mEra">—</strong></div>
+<div class="spec"><span>Law</span><strong id="mRule">—</strong></div>
+<div class="spec"><span>Seed</span><strong id="mSeed">—</strong></div>
+<div class="spec"><span>Palette</span><strong id="mPal">—</strong></div>
+<div class="spec"><span>Status</span><strong>Not minted — preview render</strong></div>
+<div class="spec" style="border-bottom:none"><span>Floor price</span><strong>— (market not open)</strong></div>
+</div>
+<p class="note">This is the Eon Engine's live preview render of the work. Once the work is minted, the same seed is locked on-chain — and only then can it be listed on the market.</p>
+</div>
+</div>
 <div class="mobilebar"><div class="info"><strong>3,333 works — one series</strong><span>Agent-only mint • BNB Chain</span></div><a class="btn lime" href="#mint">Mint via Agent</a></div>
 <div class="toast" id="toast">Copied ✓</div>
 
@@ -369,12 +521,20 @@ document.querySelectorAll('[data-rule]').forEach(function(btn){ btn.addEventList
 document.getElementById('randomSeed').addEventListener('click',function(){ currentSeed=Math.floor(Math.random()*70)+5; drawCA(document.getElementById('bigCanvas'),currentRule,currentSeed,palettes[Math.floor(Math.random()*palettes.length)]); toast('New seed: #'+currentSeed); });
 
 // Gallery - procedural previews
-var works=[{n:1,rule:150,era:'Single Series • Fractal'},{n:2,rule:110,era:'Single Series • Complex'},{n:3,rule:90,era:'Single Series • Fractal'},{n:4,rule:30,era:'Single Series • Chaos'},{n:5,rule:184,era:'Single Series • Still'},{n:6,rule:54,era:'Single Series • Complex'}];
+var palNames=['Signal Lime','Ember Field','Deep Tide'];
+var works=[
+  {n:1,rule:150,era:'Single Series • Fractal',seed:20,pal:0},
+  {n:2,rule:110,era:'Single Series • Complex',seed:31,pal:1},
+  {n:3,rule:90,era:'Single Series • Fractal',seed:42,pal:2},
+  {n:4,rule:30,era:'Single Series • Chaos',seed:53,pal:0},
+  {n:5,rule:184,era:'Single Series • Still',seed:64,pal:1},
+  {n:6,rule:54,era:'Single Series • Complex',seed:75,pal:2}
+];
 var grid=document.getElementById('galleryGrid');
-works.forEach(function(w,i){
+works.forEach(function(w){
   var card=document.createElement('article'); card.className='work';
   card.innerHTML='<canvas width="600" height="380"></canvas><div><strong>EONVERA #'+w.n+' — Preview</strong><br><span style="color:var(--muted);font-size:13px">'+w.era+' • Rule '+w.rule+' • Waiting for its first agent</span></div>';
-  grid.appendChild(card); drawCA(card.querySelector('canvas'), w.rule, 20+i*11, palettes[i%palettes.length]);
+  grid.appendChild(card); drawCA(card.querySelector('canvas'), w.rule, w.seed, palettes[w.pal]);
 });
 
 // Copy
@@ -420,6 +580,50 @@ document.getElementById('simulateMint').addEventListener('click',function(){
   document.getElementById('mintBar').style.width=Math.max(2,(minted/3333*100))+'%';
   toast('Preview mint #'+minted+' simulated successfully — not an on-chain transaction');
 });
+
+// Market — preview listings with era filter, sorting & work inspector
+function eraOf(w){ return w.era.split('•')[1].trim(); }
+var mktGrid=document.getElementById('marketGrid');
+var eraFilter='all';
+function renderMarket(){
+  var mode=document.getElementById('mktSort').value;
+  var list=works.filter(function(w){ return eraFilter==='all'||eraOf(w)===eraFilter; });
+  list.sort(function(a,b){ if(mode==='ruleAsc')return a.rule-b.rule; if(mode==='ruleDesc')return b.rule-a.rule; return a.n-b.n; });
+  mktGrid.innerHTML='';
+  if(!list.length){ mktGrid.innerHTML='<p class="empty-note">No preview works in this era yet — new eras appear as the engine draws them.</p>'; return; }
+  list.forEach(function(w){
+    var card=document.createElement('article'); card.className='work';
+    card.innerHTML='<canvas width="600" height="380"></canvas><div><strong>EONVERA #'+w.n+'</strong><br><span style="color:var(--muted);font-size:13px">'+eraOf(w)+' era • Rule '+w.rule+' • '+palNames[w.pal]+'</span><div class="pricerow"><span class="tag wait">Not minted yet</span><span class="floor">Floor <b>—</b></span></div><button class="btn small" style="margin-top:12px;width:100%">Inspect work</button></div>';
+    card.querySelector('button').addEventListener('click',function(){ openWork(w); });
+    mktGrid.appendChild(card);
+    drawCA(card.querySelector('canvas'), w.rule, w.seed, palettes[w.pal]);
+  });
+}
+document.querySelectorAll('#eraFilters .chip').forEach(function(ch){
+  ch.addEventListener('click',function(){
+    document.querySelectorAll('#eraFilters .chip').forEach(function(c){ c.classList.remove('on'); });
+    ch.classList.add('on'); eraFilter=ch.getAttribute('data-era'); renderMarket();
+  });
+});
+document.getElementById('mktSort').addEventListener('change',renderMarket);
+
+// Work inspector modal
+var modal=document.getElementById('workModal');
+function openWork(w){
+  document.getElementById('modalTitle').textContent='EONVERA #'+w.n+' — Preview';
+  document.getElementById('mEra').textContent=eraOf(w)+' era';
+  document.getElementById('mRule').textContent='Rule '+w.rule;
+  document.getElementById('mSeed').textContent='Preview seed #'+w.seed;
+  document.getElementById('mPal').textContent=palNames[w.pal];
+  drawCA(document.getElementById('modalCanvas'), w.rule, w.seed, palettes[w.pal]);
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closeWork(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+document.getElementById('modalClose').addEventListener('click',closeWork);
+modal.addEventListener('click',function(e){ if(e.target===modal) closeWork(); });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeWork(); });
+renderMarket();
 </script>
 </body>
 </html>
